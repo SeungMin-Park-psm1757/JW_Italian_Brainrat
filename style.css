@@ -95,7 +95,7 @@ body {
 
 .characters-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
 }
@@ -216,6 +216,12 @@ body {
     background: linear-gradient(45deg, var(--color-aquatic), #059669);
     color: var(--color-bg-primary);
     box-shadow: 0 0 10px rgba(6, 214, 160, 0.3);
+}
+
+.faction-badge.mafia {
+    background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+    color: white;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
 }
 
 .character-summary {
@@ -371,33 +377,39 @@ body {
     color: var(--color-accent);
 }
 
-.video-placeholder {
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.video-item {
     background: var(--color-bg-secondary);
-    border: 2px dashed var(--color-primary);
     border-radius: 15px;
-    padding: 3rem;
-    margin: 0 auto;
-    max-width: 600px;
+    padding: 1.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
 }
 
-.placeholder-content {
-    color: var(--color-text-muted);
+.video-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.play-icon {
-    font-size: 3rem;
+.video-item h3 {
+    font-family: 'Orbitron', monospace;
     color: var(--color-primary);
     margin-bottom: 1rem;
-    opacity: 0.7;
+    font-size: 1.3rem;
 }
 
-.placeholder-content p {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.placeholder-content small {
-    font-size: 0.9rem;
+.character-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Footer */
@@ -464,8 +476,20 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .characters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .characters-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .video-container {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
@@ -499,8 +523,8 @@ body {
         padding: 10px;
     }
     
-    .video-placeholder {
-        padding: 2rem 1rem;
+    .video-item {
+        padding: 1rem;
     }
 }
 
@@ -532,6 +556,10 @@ body {
     .ability-tag {
         font-size: 0.75rem;
         padding: 3px 8px;
+    }
+    
+    .video-item {
+        padding: 0.8rem;
     }
 }
 
