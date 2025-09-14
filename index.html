@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이탈리안 브레인롯 Character Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">
+                <span class="title-main">이탈리안 브레인롯</span>
+                <span class="title-sub">Character Gallery</span>
+            </h1>
+            <p class="subtitle">아들이 창작한 특별한 캐릭터들을 만나보세요</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="characters-grid">
+                <!-- 라이라이 탱크라이 -->
+                <div class="character-card" data-character="rairai">
+                    <div class="card-header">
+                        <div class="character-images">
+                            <img src="rairai-taengkeurai.jpg" alt="라이라이 탱크라이 정면" class="character-img active" data-view="front">
+                            <img src="rairai-taengkeurai-dwismoseub.jpg" alt="라이라이 탱크라이 후면" class="character-img" data-view="back">
+                        </div>
+                        <div class="image-controls">
+                            <button class="view-btn active" data-view="front">정면</button>
+                            <button class="view-btn" data-view="back">후면</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="character-info">
+                            <h2 class="character-name">라이라이 탱크라이</h2>
+                            <p class="character-name-en">Rairai Tankrai</p>
+                            <div class="faction-badge croco">크로코 진영</div>
+                        </div>
+                        
+                        <div class="character-summary">
+                            <p class="species">탱크-악어 하이브리드</p>
+                            <p class="origin">출생지: 네온 도시의 지하 무기고</p>
+                            <p class="description">거대한 군용 탱크와 고대 악어의 융합체로, 전쟁을 예술로 여기는 철학적 전사</p>
+                        </div>
+                        
+                        <div class="abilities">
+                            <span class="ability-tag">전자기 펄스</span>
+                            <span class="ability-tag">바이오 미사일</span>
+                            <span class="ability-tag">탱크 돌진</span>
+                            <span class="ability-tag">전술적 분석</span>
+                        </div>
+                        
+                        <button class="expand-btn" data-target="rairai-details">
+                            <span class="btn-text">자세히 보기</span>
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                    
+                    <div class="character-details" id="rairai-details">
+                        <div class="details-content">
+                            <h3>상세 정보</h3>
+                            <div class="detail-section">
+                                <h4>배경 스토리</h4>
+                                <p>네온 도시의 지하 무기고에서 탄생한 라이라이 탱크라이는 군용 기술과 고대 악어의 DNA가 결합되어 만들어진 특별한 존재입니다. 전쟁을 예술로 여기는 독특한 철학을 가지고 있으며, 전투에서도 아름다움과 효율성을 동시에 추구합니다.</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>성격</h4>
+                                <p>철학적이면서도 전략적인 사고를 가진 전사. 전투를 예술로 승화시키려는 열정과 동료들을 보호하려는 강한 의지를 가지고 있습니다.</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>능력 상세</h4>
+                                <ul>
+                                    <li><strong>전자기 펄스 공격:</strong> 강력한 전자기장을 방출하여 적의 전자 장비를 무력화</li>
+                                    <li><strong>바이오 미사일:</strong> 생체 에너지로 만든 미사일을 발사</li>
+                                    <li><strong>탱크 돌진:</strong> 거대한 몸집으로 적을 돌파하는 강력한 돌격</li>
+                                    <li><strong>전술적 분석:</strong> 전장의 상황을 빠르게 분석하여 최적의 전략 수립</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>명대사</h4>
+                                <blockquote class="quote">
+                                    "라이라이, 탱크라이! 구에라는 아모레, 아모레는 탱크라이!"
+                                    <cite>- 라이라이 탱크라이</cite>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 개굴록 라릴라 -->
+                <div class="character-card" data-character="gaegulrog">
+                    <div class="card-header">
+                        <div class="character-images">
+                            <img src="gaegulrog-rarilra.jpg" alt="개굴록 라릴라 정면" class="character-img active" data-view="front">
+                            <img src="gaegulrog-rarilra-dwismoseub.jpg" alt="개굴록 라릴라 후면" class="character-img" data-view="back">
+                        </div>
+                        <div class="image-controls">
+                            <button class="view-btn active" data-view="front">정면</button>
+                            <button class="view-btn" data-view="back">후면</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="character-info">
+                            <h2 class="character-name">개굴록 라릴라</h2>
+                            <p class="character-name-en">Gaegulrog Rarilla</p>
+                            <div class="faction-badge aquatic">아쿠아틱 진영 (중립)</div>
+                        </div>
+                        
+                        <div class="character-summary">
+                            <p class="species">늪지 양서류-인간 하이브리드</p>
+                            <p class="origin">출생지: 미스티코 팔루데 (신비로운 늪지대)</p>
+                            <p class="description">늪지의 현자로 불리는 중재자. 거대한 자동차 타이어와 뇌 구체들이 특징</p>
+                        </div>
+                        
+                        <div class="abilities">
+                            <span class="ability-tag">하이드로 킨에시스</span>
+                            <span class="ability-tag">뇌파 증폭</span>
+                            <span class="ability-tag">타이어 마스터리</span>
+                            <span class="ability-tag">늪지 소환</span>
+                        </div>
+                        
+                        <button class="expand-btn" data-target="gaegulrog-details">
+                            <span class="btn-text">자세히 보기</span>
+                            <span class="btn-icon">▼</span>
+                        </button>
+                    </div>
+                    
+                    <div class="character-details" id="gaegulrog-details">
+                        <div class="details-content">
+                            <h3>상세 정보</h3>
+                            <div class="detail-section">
+                                <h4>배경 스토리</h4>
+                                <p>미스티코 팔루데의 신비로운 늪지대에서 태어난 개굴록 라릴라는 물과 땅의 경계에서 살아가는 특별한 존재입니다. 오랜 세월 동안 늪지의 현자로서 다양한 종족들 사이의 갈등을 중재해왔으며, 그 과정에서 독특한 능력들을 개발했습니다.</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>성격</h4>
+                                <p>지혜롭고 평화를 추구하는 중재자. 때로는 유머러스하고 때로는 신비로운 면모를 보이며, 모든 생명체의 조화를 위해 노력합니다.</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>능력 상세</h4>
+                                <ul>
+                                    <li><strong>하이드로 킨에시스:</strong> 물의 흐름을 자유자재로 조작하는 능력</li>
+                                    <li><strong>뇌파 증폭:</strong> 뇌 구체를 통해 정신력을 극대화하여 강력한 정신 공격</li>
+                                    <li><strong>타이어 마스터리:</strong> 거대한 타이어를 무기로 사용하는 독특한 전투 기술</li>
+                                    <li><strong>늪지 소환:</strong> 늪지의 생물들과 환경을 소환하여 전투 지원</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>명대사</h4>
+                                <blockquote class="quote">
+                                    "아쿠아 에 테라, 두에 몬디 우노 쿠오레! (물과 땅, 두 세계 하나의 마음!)"
+                                    <cite>- 개굴록 라릴라</cite>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 영상 섹션 -->
+            <section class="video-section">
+                <h2 class="section-title">캐릭터 영상</h2>
+                <div class="video-placeholder">
+                    <div class="placeholder-content">
+                        <div class="play-icon">▶</div>
+                        <p>영상 준비 중...</p>
+                        <small>곧 멋진 캐릭터 영상을 만나보실 수 있습니다!</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>더 많은 캐릭터가 곧 추가될 예정입니다!</p>
+            <p class="footer-sub">이탈리안 브레인롯 Character Gallery</p>
+        </div>
+    </footer>
+
+    <!-- 이미지 모달 -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
