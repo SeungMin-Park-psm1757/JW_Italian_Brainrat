@@ -7,27 +7,33 @@ const modal = document.getElementById('imageModal');
 const modalImage = document.getElementById('modalImage');
 const closeModal = document.querySelector('.close');
 
-// 페이지 로드 시 애니메이션 및 초기화
+// 페이지 로드 시 애니메이션
 document.addEventListener('DOMContentLoaded', function() {
+    // 캐릭터 카드들에 페이드인 애니메이션 적용
     characterCards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
+        
         setTimeout(() => {
             card.classList.add('fade-in');
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
         }, index * 200);
     });
+    
+    // 이미지 로딩 처리
     handleImageLoading();
+
+    // 영상 탭 초기화
     initVideoTabs();
 });
 
-// 영상 탭 전환 초기화
 function initVideoTabs() {
     document.querySelectorAll('.video-item').forEach(item => {
         const videos = item.querySelectorAll('video');
         const tabs = item.querySelectorAll('.video-tab');
         if (tabs.length && videos.length) {
+            // 첫 번째 외엔 숨김
             videos.forEach((v, i) => { if (i !== 0) v.classList.add('hidden'); });
             tabs.forEach((t, i) => {
                 if (i === 0) t.classList.add('active');
@@ -35,8 +41,13 @@ function initVideoTabs() {
                     tabs.forEach(tab => tab.classList.remove('active'));
                     t.classList.add('active');
                     videos.forEach((v, vi) => {
-                        if (vi === i) { v.classList.remove('hidden'); v.play().catch(()=>{}); }
-                        else { v.pause(); v.classList.add('hidden'); }
+                        if (vi === i) {
+                            v.classList.remove('hidden');
+                            v.play().catch(()=>{});
+                        } else {
+                            v.pause();
+                            v.classList.add('hidden');
+                        }
                     });
                 });
             });
@@ -47,47 +58,74 @@ function initVideoTabs() {
 // 이미지 로딩 처리
 function handleImageLoading() {
     characterImgs.forEach(img => {
-        img.addEventListener('load', function() { this.classList.add('loaded'); });
-        if (img.complete) { img.classList.add('loaded'); }
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+        
+        // 이미 로드된 이미지 처리
+        if (img.complete) {
+            img.classList.add('loaded');
+        }
     });
 }
 
-// 자세히 보기 토글
+// 자세히 보기 버튼 이벤트
 expandBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         const targetId = this.getAttribute('data-target');
         const details = document.getElementById(targetId);
         const icon = this.querySelector('.btn-icon');
         const btnText = this.querySelector('.btn-text');
+        
         if (details.classList.contains('active')) {
+            // 닫기
             details.classList.remove('active');
             this.classList.remove('active');
             icon.textContent = '▼';
             btnText.textContent = '자세히 보기';
         } else {
+            // 열기
             details.classList.add('active');
             this.classList.add('active');
             icon.textContent = '▲';
             btnText.textContent = '접기';
-            setTimeout(() => { details.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+            
+            // 부드러운 스크롤 효과
+            setTimeout(() => {
+                details.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            }, 100);
         }
     });
 });
 
-// 정면/후면 전환
+// 이미지 전환 버튼 이벤트
 viewBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         const view = this.getAttribute('data-view');
         const card = this.closest('.character-card');
         const images = card.querySelectorAll('.character-img');
         const buttons = card.querySelectorAll('.view-btn');
-        buttons.forEach(b => b.classList.remove('active'));
+        
+        // 모든 버튼 비활성화
+        buttons.forEach(btn => btn.classList.remove('active'));
+        // 클릭한 버튼 활성화
         this.classList.add('active');
-        images.forEach(img => img.classList.toggle('active', img.getAttribute('data-view') === view));
+        
+        // 이미지 전환
+        images.forEach(img => {
+            if (img.getAttribute('data-view') === view) {
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
     });
 });
 
-// 이미지 모달
+// 이미지 클릭 시 모달 열기
 characterImgs.forEach(img => {
     img.addEventListener('click', function() {
         modalImage.src = this.src;
@@ -96,12 +134,35 @@ characterImgs.forEach(img => {
         document.body.style.overflow = 'hidden';
     });
 });
-closeModal.addEventListener('click', closeModalFn);
-modal.addEventListener('click', e => { if (e.target === modal) closeModalFn(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display === 'block') closeModalFn(); });
-function closeModalFn() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-// 스크롤 인뷰 애니메이션
+// 모달 닫기
+closeModal.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+// 모달 배경 클릭 시 닫기
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// ESC 키로 모달 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// 스크롤 시 카드 애니메이션
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -109,44 +170,83 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.style.transform = 'translateY(0)';
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-characterCards.forEach(card => observer.observe(card));
+}, observerOptions);
 
-// 스와이프 전환
-let touchStartX = 0, touchEndX = 0;
+// 모든 캐릭터 카드 관찰
 characterCards.forEach(card => {
-    card.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
-    card.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(card); });
+    observer.observe(card);
 });
+
+// 터치 이벤트 지원 (모바일)
+let touchStartX = 0;
+let touchEndX = 0;
+
+characterCards.forEach(card => {
+    card.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    card.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe(card);
+    });
+});
+
 function handleSwipe(card) {
+    const swipeThreshold = 50;
     const diff = touchStartX - touchEndX;
-    const images = card.querySelectorAll('.character-img');
-    const activeImg = card.querySelector('.character-img.active');
-    if (Math.abs(diff) > 50) {
-        if (diff > 0 && activeImg.getAttribute('data-view') === 'front') switchToView(card, 'back', images);
-        else if (diff < 0 && activeImg.getAttribute('data-view') === 'back') switchToView(card, 'front', images);
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        const images = card.querySelectorAll('.character-img');
+        const buttons = card.querySelectorAll('.view-btn');
+        const activeImg = card.querySelector('.character-img.active');
+        const activeBtn = card.querySelector('.view-btn.active');
+        
+        if (diff > 0) {
+            // 왼쪽으로 스와이프 - 다음 이미지
+            if (activeImg.getAttribute('data-view') === 'front') {
+                switchToView(card, 'back', images, buttons);
+            }
+        } else {
+            // 오른쪽으로 스와이프 - 이전 이미지
+            if (activeImg.getAttribute('data-view') === 'back') {
+                switchToView(card, 'front', images, buttons);
+            }
+        }
     }
 }
-function switchToView(card, view, images) {
-    card.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-view') === view));
-    images.forEach(img => img.classList.toggle('active', img.getAttribute('data-view') === view));
+
+function switchToView(card, view, images, buttons) {
+    // 모든 버튼 비활성화
+    buttons.forEach(btn => btn.classList.remove('active'));
+    // 해당 뷰 버튼 활성화
+    const targetBtn = card.querySelector(`[data-view="${view}"]`);
+    if (targetBtn) targetBtn.classList.add('active');
+    
+    // 이미지 전환
+    images.forEach(img => {
+        if (img.getAttribute('data-view') === view) {
+            img.classList.add('active');
+        } else {
+            img.classList.remove('active');
+        }
+    });
 }
 
-// 반응형 레이아웃 보정
-let resizeTimeout;
-window.addEventListener('resize', function() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(function() {
-        const isMobile = window.innerWidth <= 768;
-        characterCards.forEach(card => { card.style.margin = isMobile ? '0 10px' : '0'; });
-    }, 250);
-});
-window.addEventListener('load', function() {
-    const isMobile = window.innerWidth <= 768;
-    characterCards.forEach(card => { if (isMobile) card.style.margin = '0 10px'; });
+// 키보드 네비게이션 지원
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        // 포커스된 요소에 시각적 표시
+        const focusedElement = document.activeElement;
+        if (focusedElement.classList.contains('expand-btn') || 
+            focusedElement.classList.contains('view-btn')) {
+            focusedElement.style.outline = '2px solid var(--color-accent)';
+            focusedElement.style.outlineOffset = '2px';
+        }
+    }
 });
 
-// 로드 실패 대체
+// 이미지 로드 실패 시 대체 처리
 characterImgs.forEach(img => {
     img.addEventListener('error', function() {
         this.style.background = 'var(--color-bg-tertiary)';
@@ -155,5 +255,33 @@ characterImgs.forEach(img => {
         this.style.justifyContent = 'center';
         this.style.color = 'var(--color-text-muted)';
         this.style.fontSize = '1rem';
+        this.innerHTML = '이미지를 불러올 수 없습니다';
+    });
+});
+
+// 성능 최적화: 디바운스된 리사이즈 이벤트
+let resizeTimeout;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+        // 모바일/데스크탑 전환 시 레이아웃 재조정
+        const isMobile = window.innerWidth <= 768;
+        characterCards.forEach(card => {
+            if (isMobile) {
+                card.style.margin = '0 10px';
+            } else {
+                card.style.margin = '0';
+            }
+        });
+    }, 250);
+});
+
+// 초기 레이아웃 설정
+window.addEventListener('load', function() {
+    const isMobile = window.innerWidth <= 768;
+    characterCards.forEach(card => {
+        if (isMobile) {
+            card.style.margin = '0 10px';
+        }
     });
 });
